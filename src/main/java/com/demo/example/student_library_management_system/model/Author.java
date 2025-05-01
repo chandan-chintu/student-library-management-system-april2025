@@ -1,5 +1,6 @@
 package com.demo.example.student_library_management_system.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class Author {
     @Column(name = "rating", nullable = false)
     private double rating;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "author")
     private List<Book> bookList;
 

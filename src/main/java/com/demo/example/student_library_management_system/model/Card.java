@@ -1,6 +1,8 @@
 package com.demo.example.student_library_management_system.model;
 
 import com.demo.example.student_library_management_system.enums.CardStatus;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -29,13 +31,16 @@ public class Card {
     @UpdateTimestamp // when card gets updated it will add date and time
     private Date updatedDate;
 
+    @JsonBackReference
     @JoinColumn // it joins the primary key student id of student table as foreign key in card table
     @OneToOne // one card is assigned to one student
     private Student student;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "card")
     private List<Book> bookList;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "card")
     private List<Transaction> transactionList;
 
